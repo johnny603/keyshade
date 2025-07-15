@@ -168,10 +168,19 @@ export default class ChangeNotifier
         )}`
       )
     } catch (error) {
+      // Improved error handling for user-friendly messages
+      let errorMessage = 'An unknown error occurred.'
+      if (error instanceof Error) {
+        errorMessage = error.message
+      } else if (typeof error === 'string') {
+        errorMessage = error
+      } else if (typeof error === 'object' && error !== null) {
+        errorMessage = JSON.stringify(error)
+      }
       this.logger.error(error)
       client.emit('client-registered', {
         success: false,
-        message: error as string
+        message: errorMessage
       })
     }
   }
