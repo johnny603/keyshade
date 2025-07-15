@@ -152,16 +152,13 @@ export default class RunCommand extends BaseCommand {
             this.environmentSlug = data.environment
             Logger.info('Successfully registered to API')
           } else {
-            let errorText: string
-
-            try {
-              const { header, body } = JSON.parse(registrationResponse.message)
-              errorText = `${header}: ${body}`
-            } catch {
-              errorText = `Error registering to API: ${registrationResponse.message}`
-            }
-
-            Logger.error(errorText)
+            Logger.error(
+              `Error registering to API: ${
+                typeof registrationResponse.message === 'string'
+                  ? registrationResponse.message
+                  : 'Unknown error'
+              }`
+            )
             process.exit(1)
           }
         }
