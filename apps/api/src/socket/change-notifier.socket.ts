@@ -177,7 +177,10 @@ export default class ChangeNotifier
       } else if (typeof error === 'object' && error !== null) {
         errorMessage = JSON.stringify(error)
       }
-      this.logger.error(error)
+      this.logger.error({
+        message: 'Error during client registration',
+        body: error
+      })
       client.emit('client-registered', {
         success: false,
         message: errorMessage
