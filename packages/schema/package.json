@@ -23,6 +23,6 @@
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\""
   },
   "dependencies": {
-    "zod": "^3.23.6"
+    "zod": "^4.2.0"
   }
 }
